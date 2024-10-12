@@ -1,0 +1,7 @@
+FROM python:3.12-slim
+WORKDIR /game
+RUN pip install poetry
+COPY . .
+RUN poetry install
+EXPOSE 8000
+CMD ["poetry", "run", "uvicorn", "--proxy-headers", "--host", "0.0.0.0", "--port", "8000", "main:app"]
